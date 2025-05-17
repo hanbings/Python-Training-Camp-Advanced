@@ -22,13 +22,13 @@ def conv2d(x, kernel):
                   out_H = H - kH + 1
                   out_W = W - kW + 1
     """
-    # 请在此处编写代码
-    # 提示：
-    # 1. 获取输入 x 和卷积核 kernel 的形状。
-    # 2. 计算输出的高度和宽度。
-    # 3. 初始化输出数组。
-    # 4. 使用嵌套循环遍历输出数组的每个位置 (i, j)。
-    # 5. 提取输入 x 中与当前卷积核对应的区域 (patch)。
-    # 6. 计算 patch 和 kernel 的元素乘积之和 (np.sum(patch * kernel))。
-    # 7. 将结果存入输出数组 out[i, j]。
-    pass 
+    H, W = x.shape
+    kH, kW = kernel.shape
+    out_H = H - kH + 1
+    out_W = W - kW + 1
+    out = np.zeros((out_H, out_W), dtype=x.dtype)
+    for i in range(out_H):
+        for j in range(out_W):
+            patch = x[i:i+kH, j:j+kW]
+            out[i, j] = np.sum(patch * kernel)
+    return out 
